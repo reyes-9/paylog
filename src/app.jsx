@@ -1,20 +1,23 @@
 import { useState } from "react";
-import ExpenseForm from "./components/ExpenseForm";
-import ExpenseList from "./components/ExpenseList";
+import LoginForm from "./components/LoginForm";
+import ExpensesPage from "./pages/ExpensePage";
 import "./styles.css";
 
 function App() {
-  const [expenses, setExpenses] = useState([]);
+  const [user, setUser] = useState(null);
 
-  const addExpense = (expense) => {
-    setExpenses([...expenses, expense]);
+  const handleLoginSuccess = (userData) => {
+    setUser(userData);
   };
+
+  if (!user) {
+    return <LoginForm onLoginSuccess={handleLoginSuccess} />;
+  }
 
   return (
     <div className="container">
       <h1>Expense Tracker</h1>
-      <ExpenseForm onAddExpense={addExpense} />
-      <ExpenseList expenses={expenses} />
+      <ExpensesPage /> {/* All expense logic lives here */}
     </div>
   );
 }
