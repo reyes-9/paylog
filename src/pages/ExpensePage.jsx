@@ -7,26 +7,26 @@ function ExpensesPage() {
   const [error, setError] = useState(null);
 
   // Fetch existing expenses on page load
-//   useEffect(() => {
-//     const fetchExpenses = async () => {
-//       try {
-//         const res = await fetch(`${import.meta.env.VITE_API_URL}/expenses`, {
-//           credentials: "include",
-//         });
+  //   useEffect(() => {
+  //     const fetchExpenses = async () => {
+  //       try {
+  //         const res = await fetch(`${import.meta.env.VITE_API_URL}/expenses`, {
+  //           credentials: "include",
+  //         });
 
-//         if (!res.ok) {
-//           throw new Error("Failed to fetch expenses");
-//         }
+  //         if (!res.ok) {
+  //           throw new Error("Failed to fetch expenses");
+  //         }
 
-//         const data = await res.json();
-//         setExpenses(data);
-//       } catch (err) {
-//         console.error("Error fetching expenses:", err);
-//         setError("Could not load expenses. Please try again later.");
-//       }
-//     };
-//     fetchExpenses();
-//   }, []);
+  //         const data = await res.json();
+  //         setExpenses(data);
+  //       } catch (err) {
+  //         console.error("Error fetching expenses:", err);
+  //         setError("Could not load expenses. Please try again later.");
+  //       }
+  //     };
+  //     fetchExpenses();
+  //   }, []);
 
   const addExpense = async (expenseData) => {
     try {
