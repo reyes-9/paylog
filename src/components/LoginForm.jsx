@@ -1,118 +1,63 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
-export default function LoginForm({ onLoginSuccess }) {
+export default function LoginForm() {
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(null);
-    setLoading(true);
 
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({ email, password }),
-      });
-
-      if (!res.ok) {
-        const errData = await res.json();
-        throw new Error(errData.message || "Login failed");
-      }
-
-      const data = await res.json();
-      setLoading(false);
-      onLoginSuccess && onLoginSuccess(data); // callback to parent on success
+      await login(email, password);
+      navigate("/dashboard");
     } catch (err) {
-      setLoading(false);
-      setError(err.message);
+      alert("Invalid credentials");
     }
   };
 
   return (
     <form
       onSubmit={handleSubmit}
-      style={{
-        maxWidth: 320,
-        margin: "auto",
-        padding: 20,
-        border: "1px solid #ccc",
-        borderRadius: 4,
-        fontFamily: "Arial, sans-serif",
-      }}
+      className="max-w-sm mx-auto mt-20 bg-white shadow-lg rounded-lg p-6 space-y-4"
     >
-      <h2 style={{ textAlign: "center" }}>Login</h2>
+      <h2 className="text-2xl font-semibold text-center text-gray-800">
+        Welcome Back
+      </h2>
 
-      <label htmlFor="email" style={{ display: "block", marginBottom: 6 }}>
-        Email
-      </label>
-      <input
-        id="email"
-        type="email"
-        required
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        style={{
-          width: "100%",
-          padding: 8,
-          marginBottom: 12,
-          borderRadius: 4,
-          border: "1px solid #ccc",
-          fontSize: 16,
-        }}
-      />
+      <div>
+        <label className="block text-sm font-medium text-gray-600">Email</label>
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Enter your email"
+          className="w-full mt-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+        />
+      </div>
 
-      <label htmlFor="password" style={{ display: "block", marginBottom: 6 }}>
-        Password
-      </label>
-      <input
-        id="password"
-        type="password"
-        required
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        style={{
-          width: "100%",
-          padding: 8,
-          marginBottom: 12,
-          borderRadius: 4,
-          border: "1px solid #ccc",
-          fontSize: 16,
-        }}
-      />
-
-      {error && (
-        <div
-          style={{
-            marginBottom: 12,
-            color: "red",
-            fontWeight: "bold",
-            textAlign: "center",
-          }}
-        >
-          {error}
-        </div>
-      )}
+      <div>
+        <label className="block text-sm font-medium text-gray-600">
+          Password
+        </label>
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Enter your password"
+          className="w-full mt-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+        />
+      </div>
 
       <button
         type="submit"
-        disabled={loading}
-        style={{
-          width: "100%",
-          padding: 10,
-          fontSize: 16,
-          backgroundColor: "#0070f3",
-          color: "white",
-          border: "none",
-          borderRadius: 4,
-          cursor: loading ? "not-allowed" : "pointer",
-        }}
+        className="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 transition-colors"
       >
-        {loading ? "Logging in..." : "Login"}
+        Login
       </button>
     </form>
   );
