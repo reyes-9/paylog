@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { LuLayoutDashboard, LuReceipt, LuMenu, LuLogOut } from "react-icons/lu";
+import Modal from "../Modal/Modal";
 
 const Sidebar = ({ onLogout }) => {
   const [active, setActive] = useState("dashboard");
   const [collapsed, setCollapsed] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <aside
@@ -47,14 +49,35 @@ const Sidebar = ({ onLogout }) => {
       </nav>
 
       {/* Logout Button */}
-      <div className="border-t border-gray-800 p-4">
+
+      <div>
         <button
-          onClick={onLogout}
-          className="flex items-center gap-4 px-4 py-3 w-full rounded-lg hover:bg-red-600 transition"
+          onClick={() => setIsOpen(true)}
+          className="flex items-center w-full gap-4 px-4 py-3 hover:bg-red-600 transition"
         >
           <LuLogOut size={20} />
           {!collapsed && <span>Logout</span>}
         </button>
+
+        <Modal
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          title="Logout"
+          textColor="text-red-600"
+        >
+          <p>Are you sure you want to logout?</p>
+          <div className="flex items-center justify-end gap-4 mt-4">
+            <button className="px-6 py-2 rounded-lg border border-gray-300 bg-white text-gray-700 font-medium shadow-sm hover:bg-gray-100 hover:border-gray-400 transition">
+              Cancel
+            </button>
+            <button
+              onClick={onLogout}
+              className="px-6 py-2 rounded-lg bg-red-100 text-red-700 font-medium shadow-sm hover:bg-red-200 hover:shadow-md transition"
+            >
+              Logout
+            </button>
+          </div>
+        </Modal>
       </div>
     </aside>
   );
