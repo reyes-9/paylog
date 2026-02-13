@@ -14,6 +14,8 @@ module.exports = {
         },
         accent: {
           purple: "#5444e5",
+          lightPurple: "#dab2ff",
+          red: "#fca5a5",
         },
       },
     },

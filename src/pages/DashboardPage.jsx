@@ -70,14 +70,20 @@ function DashboardPage() {
       <WelcomeCard name={fullName} />
 
       <div className="min-h-screen text-gray-100 p-6">
-        <main className="max-w-7xl mx-auto space-y-8">
+        <main className="max-w-7xl mx-auto space-y-10">
           {/* Header */}
           <header className="space-y-2">
             <p className="text-sm uppercase tracking-widest text-gray-400">
-              Paylog Dashboard
+              Summary
             </p>
           </header>
           <DashboardCards />
+
+          <div className="my-10">
+            <p className="text-sm uppercase tracking-widest text-gray-400">
+              Expense Table
+            </p>
+          </div>
           {/* Table */}
           <section className="overflow-x-auto bg-gray-900/60 border border-gray-800 rounded-2xl shadow-lg">
             <table className="min-w-full text-sm text-left">
@@ -88,29 +94,11 @@ function DashboardPage() {
                   <th className="px-4 py-3">Actual</th>
                   <th className="px-4 py-3">Total</th>
                   <th className="px-4 py-3">Balance</th>
-                  <th className="px-4 py-3">Income</th>
                   <th className="px-4 py-3">Total</th>
                 </tr>
               </thead>
 
               <tbody className="divide-y divide-gray-800">
-                {/* Summary Row */}
-                <tr className="bg-gray-800/70 font-semibold">
-                  <td className="px-4 py-3">Summary</td>
-                  <td className="px-4 py-3">
-                    {formatPeso(summary.incomeTotal)}
-                  </td>
-                  <td className="px-4 py-3">
-                    {formatPeso(summary.expensesTotal)}
-                  </td>
-                  <td className="px-4 py-3">{formatPeso(summary.balance)}</td>
-                  <td className="px-4 py-3">{formatPeso(summary.balance)}</td>
-                  <td className="px-4 py-3"></td>
-                  <td className="px-4 py-3">
-                    {formatPeso(summary.incomeTotal)}
-                  </td>
-                </tr>
-
                 {/* Category Rows */}
                 {categories.map((item) => (
                   <tr
@@ -122,7 +110,6 @@ function DashboardPage() {
                     <td className="px-4 py-3">{formatPeso(item.actual)}</td>
                     <td className="px-4 py-3">{formatPeso(item.total)}</td>
                     <td className="px-4 py-3">{formatPeso(item.balance)}</td>
-                    <td className="px-4 py-3">{item.incomeSource ?? ""}</td>
                     <td className="px-4 py-3">
                       {item.income ? formatPeso(item.income) : ""}
                     </td>

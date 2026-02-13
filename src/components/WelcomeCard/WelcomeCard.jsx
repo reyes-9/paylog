@@ -1,4 +1,4 @@
-const WelcomeCard = ({ name, subtitle = "Glad to see you back!", avatar }) => {
+const WelcomeCard = ({ name, subtitle = "Glad to see you back!" }) => {
   const displayName = name && name.trim() ? name : "Guest";
 
   return (
