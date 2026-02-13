@@ -45,28 +45,7 @@ const Sidebar = ({ onLogout }) => {
           <LuLogOut />
         </button>
 
-        <Modal
-          isOpen={isOpen}
-          onClose={() => setIsOpen(false)}
-          title="Logout"
-          textColor="text-red-600"
-        >
-          <p>Are you sure you want to logout?</p>
-          <div className="flex items-center justify-end gap-4 mt-4">
-            <button
-              className="px-6 py-2 rounded-lg border border-gray-300 bg-white text-gray-700 font-medium shadow-sm hover:bg-gray-100 hover:border-gray-400 transition"
-              onClick={() => setIsOpen(false)}
-            >
-              Cancel
-            </button>
-            <button
-              onClick={onLogout}
-              className="px-6 py-2 rounded-lg bg-red-100 text-red-700 font-medium shadow-sm hover:bg-red-200 hover:shadow-md transition"
-            >
-              Logout
-            </button>
-          </div>
-        </Modal>
+        
       </div> */}
       {collapsed ? (
         // Collapsed: show only icons
@@ -89,7 +68,28 @@ const Sidebar = ({ onLogout }) => {
           </button>
         </div>
       )}
-
+      <Modal
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        title="Logout"
+        textColor="text-red-600"
+      >
+        <p>Are you sure you want to logout?</p>
+        <div className="flex items-center justify-end gap-4 mt-4">
+          <button
+            className="px-6 py-2 rounded-lg border border-gray-300 bg-white text-gray-700 font-medium shadow-sm hover:bg-gray-100 hover:border-gray-400 transition"
+            onClick={() => setIsOpen(false)}
+          >
+            Cancel
+          </button>
+          <button
+            onClick={onLogout}
+            className="px-6 py-2 rounded-lg bg-red-100 text-red-700 font-medium shadow-sm hover:bg-red-200 hover:shadow-md transition"
+          >
+            Logout
+          </button>
+        </div>
+      </Modal>
       {/* Menu */}
       <nav className="flex-1 mt-4 space-y-2">
         {/* Dashboard */}
