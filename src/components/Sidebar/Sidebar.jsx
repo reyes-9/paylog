@@ -54,14 +54,14 @@ const Sidebar = ({ onLogout }) => {
         </div>
       ) : (
         // Expanded: show full buttons
-        <div className="flex border-t border-b border-gray-500 my-4">
-          <button className="flex items-center justify-center w-full gap-3 px-3 py-3 cursor-pointer rounded-lg transition hover:text-accent-lightPurple">
+        <div className="flex border-t border-b border-gray-500 my-4 px-2">
+          <button className="flex items-center justify-center w-full gap-3 px-3 py-3 cursor-pointer rounded-lg hover:text-gray-300 transition">
             <LuUser />
             Profile
           </button>
           <button
             onClick={() => setIsOpen(true)}
-            className="flex items-center justify-center w-full gap-3 px-4 py-3 cursor-pointer rounded-lg transition hover:text-accent-red"
+            className="flex items-center justify-center w-full gap-3 px-4 py-3 cursor-pointer rounded-sm hover:text-gray-300 transition"
           >
             <LuLogOut />
             Logout
