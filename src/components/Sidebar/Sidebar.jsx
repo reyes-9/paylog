@@ -10,7 +10,7 @@ const Sidebar = ({ onLogout }) => {
   return (
     <aside
       className={`${
-        collapsed ? "w-20" : "w-64"
+        collapsed ? "w-20" : "w-60"
       } h-screen bg-gray-900 text-white transition-all duration-300 flex flex-col`}
     >
       {/* Header */}
@@ -30,7 +30,7 @@ const Sidebar = ({ onLogout }) => {
         {/* Dashboard */}
         <div
           onClick={() => setActive("dashboard")}
-          className={`flex items-center gap-4 px-4 py-3 cursor-pointer rounded-lg mx-2 transition
+          className={`flex items-center justify-center gap-4 px-4 py-3 cursor-pointer rounded-lg mx-2 transition
             ${active === "dashboard" ? "bg-accent-purple" : "hover:bg-gray-800"}`}
         >
           <LuLayoutDashboard size={20} />
@@ -40,8 +40,8 @@ const Sidebar = ({ onLogout }) => {
         {/* Expenses */}
         <div
           onClick={() => setActive("expenses")}
-          className={`flex items-center gap-4 px-4 py-3 cursor-pointer rounded-lg mx-2 transition
-            ${active === "expenses" ? "bg-blue-600" : "hover:bg-gray-800"}`}
+          className={`flex items-center justify-center gap-4 px-4 py-3 cursor-pointer rounded-lg mx-2 transition
+            ${active === "expenses" ? "bg-accent-purple" : "hover:bg-gray-800"}`}
         >
           <LuReceipt size={20} />
           {!collapsed && <span>Expenses</span>}
@@ -53,7 +53,7 @@ const Sidebar = ({ onLogout }) => {
       <div>
         <button
           onClick={() => setIsOpen(true)}
-          className="flex items-center w-full gap-4 px-4 py-3 hover:bg-red-600 transition"
+          className="flex items-center justify-center w-full gap-4 px-4 py-3 cursor-pointer rounded-lg transition hover:bg-red-600"
         >
           <LuLogOut size={20} />
           {!collapsed && <span>Logout</span>}
@@ -67,7 +67,10 @@ const Sidebar = ({ onLogout }) => {
         >
           <p>Are you sure you want to logout?</p>
           <div className="flex items-center justify-end gap-4 mt-4">
-            <button className="px-6 py-2 rounded-lg border border-gray-300 bg-white text-gray-700 font-medium shadow-sm hover:bg-gray-100 hover:border-gray-400 transition">
+            <button
+              className="px-6 py-2 rounded-lg border border-gray-300 bg-white text-gray-700 font-medium shadow-sm hover:bg-gray-100 hover:border-gray-400 transition"
+              onClick={() => setIsOpen(false)}
+            >
               Cancel
             </button>
             <button
