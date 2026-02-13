@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { api } from "../utils/api";
 
 const AuthContext = createContext();
 
@@ -10,11 +11,7 @@ export function AuthProvider({ children }) {
 
   const checkAuth = async () => {
     try {
-      const res = await fetch(`${API}/auth/check`, {
-        credentials: "include",
-      });
-
-      const data = await res.json();
+      const data = await api.get("/auth/check");
 
       if (data.userId) {
         setUser({ user_id: data.userId });
@@ -30,26 +27,18 @@ export function AuthProvider({ children }) {
   };
 
   const login = async (email, password) => {
-    const res = await fetch(`${API}/auth/login`, {
-      method: "POST",
-      credentials: "include",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
+    try {
+      const res = await api.post("/auth/login", { email, password });
 
-    if (!res.ok) {
-      throw new Error("Login Failed");
+      await checkAuth();
+    } catch (err) {
+      console.error("Login failed:", err);
+      throw err;
     }
-
-    await checkAuth();
   };
 
   const logout = async () => {
-    await fetch(`${API}/auth/logout`, {
-      method: "POST",
-      credentials: "include",
-    });
-
+    const res = await api.post("/auth/logout");
     setUser(null);
   };
 
@@ -67,3 +56,34 @@ export function AuthProvider({ children }) {
 export function useAuth() {
   return useContext(AuthContext);
 }
+
+// const res = await fetch(`${API}/auth/check`, {
+//   method: "GET",
+//   credentials: "include",
+// });
+
+// const data = await res.json();
+
+// const login = async (email, password) => {
+//   const res = await fetch(`${API}/auth/login`, {
+//     method: "POST",
+//     credentials: "include",
+//     headers: { "Content-Type": "application/json" },
+//     body: JSON.stringify({ email, password }),
+//   });
+
+//   if (!res.ok) {
+//     throw new Error("Login Failed");
+//   }
+
+//   await checkAuth();
+// };
+
+// const logout = async () => {
+//   await fetch(`${API}/auth/logout`, {
+//     method: "POST",
+//     credentials: "include",
+//   });
+
+//   setUser(null);
+// };

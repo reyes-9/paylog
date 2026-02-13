@@ -1,13 +1,8 @@
-// PUSH THEN IDENTIFY ON HOW YOU WILL VISUALIZE THE DATA
-// PUSH THEN IDENTIFY ON HOW YOU WILL VISUALIZE THE DATA
-// PUSH THEN IDENTIFY ON HOW YOU WILL VISUALIZE THE DATA
-// PUSH THEN IDENTIFY ON HOW YOU WILL VISUALIZE THE DATA
-// PUSH THEN IDENTIFY ON HOW YOU WILL VISUALIZE THE DATA
-// PUSH THEN IDENTIFY ON HOW YOU WILL VISUALIZE THE DATA
-
 import DashboardCards from "../components/DashboardCards/DashboardCards";
 import WelcomeCard from "../components/WelcomeCard/WelcomeCard";
 import { useState, useEffect } from "react";
+import { formatPeso } from "../utils/currency";
+import { api } from "../utils/api";
 
 const categories = [
   {
@@ -47,38 +42,17 @@ const summary = {
   balance: 1811,
 };
 
-const peso = new Intl.NumberFormat("en-PH", {
-  style: "currency",
-  currency: "PHP",
-  maximumFractionDigits: 0,
-});
-
-function formatPeso(value) {
-  return peso.format(value).replace("PHP", "₱").replace(/\s/g, "");
-}
-
 function DashboardPage() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
     const getDashboardData = async () => {
       try {
-        const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/dashboard/get-data`,
-          {
-            method: "GET",
-            credentials: "include",
-          },
-        );
-
-        if (!response.ok) {
-          throw new Error("Unauthorized or server error.");
-        }
-
-        const result = await response.json();
-        setData(result);
+        const response = await api.get("/dashboard/get-data");
+        setData(response);
       } catch (err) {
         console.error(err);
+        console.error("Dashboard load failed:", err.message);
       }
     };
 
@@ -86,9 +60,10 @@ function DashboardPage() {
   }, []); // run once on mount
 
   const user = data?.userData?.[0];
+
   const fullName = user
-    ? `${user.first_name ?? ""} ${user.last_name ?? ""}`
-    : "";
+    ? [user.first_name, user.last_name].filter(Boolean).join(" ") || undefined
+    : undefined;
 
   return (
     <div>

@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import LoginForm from "../components/LoginForm";
+import LoginForm from "../components/LoginForm/LoginForm";
 import DashboardPage from "../pages/DashboardPage";
 import ExpensesPage from "../pages/ExpensePage";
 import ProtectedLayout from "../layouts/ProtectedLayout";
