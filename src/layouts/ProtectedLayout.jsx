@@ -2,6 +2,7 @@ import { Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import Sidebar from "../components/Sidebar/Sidebar";
 
+
 export default function ProtectedLayout({ children }) {
   const { user, logout } = useAuth();
 
@@ -10,7 +11,9 @@ export default function ProtectedLayout({ children }) {
   return (
     <div style={{ display: "flex" }}>
       <Sidebar onLogout={logout} />
-      <div style={{ flex: 1 }}>{children}</div>
+      <div className="p-3" style={{ flex: 1 }}>
+        {children}
+      </div>
     </div>
   );
 }

@@ -1,6 +1,9 @@
 import { useState } from "react";
-import ExpenseForm from "../components/ExpenseForm";
+import ExpenseForm from "../components/ExpenseForm/ExpenseForm";
 import ExpenseList from "../components/ExpenseList";
+import ExpenseTable from "../components/ExpenseTable/ExpenseTable";
+import Breadcrumbs from "../components/Breadcrumbs/Breadcrumbs";
+import Layout from "../layouts/Layout";
 
 function ExpensesPage() {
   const [expenses, setExpenses] = useState([]);
@@ -50,11 +53,19 @@ function ExpensesPage() {
   };
 
   return (
-    <div>
-      {error && <p className="error">{error}</p>}
-      <ExpenseForm onAddExpense={addExpense} />
-      <ExpenseList expenses={expenses} />
-    </div>
+    <Layout>
+      <div className="min-h-screen text-gray-100 p-6">
+        <div className="flex justify-between items-center px-5">
+          {/* <WelcomeCard name={fullName} /> */}
+          <h1>test</h1>
+          <Breadcrumbs />
+        </div>
+        <ExpenseTable />
+        {error && <p className="error">{error}</p>}
+        <ExpenseForm onAddExpense={addExpense} />
+        <ExpenseList expenses={expenses} />
+      </div>
+    </Layout>
   );
 }
 

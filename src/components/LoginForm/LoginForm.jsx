@@ -8,15 +8,19 @@ export default function LoginForm() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     try {
       await login(email, password);
       navigate("/dashboard");
     } catch (err) {
       alert("Invalid credentials");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -55,9 +59,10 @@ export default function LoginForm() {
 
       <button
         type="submit"
-        className="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 transition-colors"
+        className={`w-full text-white py-2 rounded-md hover:bg-indigo-700 transition-colors ${isLoading ? "bg-gray-400 cursor-not-allowed" : " bg-indigo-600"}`}
+        disabled={isLoading}
       >
-        Login
+        {isLoading ? "Logging in..." : "Login"}
       </button>
     </form>
   );
