@@ -38,7 +38,6 @@ const summary = {
   balance: 1811,
 };
 
-
 const ExpenseTable = () => {
   return (
     <div>

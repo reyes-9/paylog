@@ -1,9 +1,10 @@
 import { useState } from "react";
-import ExpenseForm from "../components/ExpenseForm/ExpenseForm";
-import ExpenseList from "../components/ExpenseList";
-import ExpenseTable from "../components/ExpenseTable/ExpenseTable";
-import Breadcrumbs from "../components/Breadcrumbs/Breadcrumbs";
-import Layout from "../layouts/Layout";
+import { NavLink } from "react-router-dom";
+import ExpenseForm from "../../components/ExpenseForm/ExpenseForm";
+import ExpenseList from "../../components/ExpenseList";
+import ExpenseTable from "../../components/ExpenseTable/ExpenseTable";
+import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
+import Layout from "../../layouts/Layout";
 
 function ExpensesPage() {
   const [expenses, setExpenses] = useState([]);
@@ -54,16 +55,29 @@ function ExpensesPage() {
 
   return (
     <Layout>
-      <div className="min-h-screen text-gray-100 p-6">
-        <div className="flex justify-between items-center px-5">
-          {/* <WelcomeCard name={fullName} /> */}
-          <h1>test</h1>
-          <Breadcrumbs />
-        </div>
-        <ExpenseTable />
-        {error && <p className="error">{error}</p>}
-        <ExpenseForm onAddExpense={addExpense} />
-        <ExpenseList expenses={expenses} />
+      <div className="flex justify-between items-center">
+        <p className="text-xl font-smibold text-center text-gray-100">
+          Expenses
+        </p>
+        <Breadcrumbs />
+      </div>
+
+      <div className="min-h-screen text-gray-100 mt-16">
+        <main className="mx-auto space-y-10">
+          <div>
+            <p className="text-sm uppercase tracking-widest text-gray-400 mb-5">
+              Expense Table
+            </p>
+          </div>
+          {/* Table */}
+          <NavLink
+            to="/expenses/add"
+            className="bg-emerald-400 hover:bg-emerald-500 text-emerald-950 px-3 py-2 rounded text-sm mb-0"
+          >
+            Add Expense
+          </NavLink>
+          <ExpenseTable />
+        </main>
       </div>
     </Layout>
   );

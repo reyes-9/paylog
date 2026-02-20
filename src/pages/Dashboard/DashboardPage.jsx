@@ -1,10 +1,10 @@
-import DashboardCards from "../components/SummaryCards/SummaryCards";
-import WelcomeCard from "../components/WelcomeCard/WelcomeCard";
-import ExpenseTable from "../components/ExpenseTable/ExpenseTable";
-import Breadcrumbs from "../components/Breadcrumbs/Breadcrumbs";
-import Layout from "../layouts/Layout";
+import DashboardCards from "../../components/SummaryCards/SummaryCards";
+import WelcomeCard from "../../components/WelcomeCard/WelcomeCard";
+import ExpenseTable from "../../components/ExpenseTable/ExpenseTable";
+import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
+import Layout from "../../layouts/Layout";
 import { useState, useEffect } from "react";
-import { api } from "../utils/api";
+import { api } from "../../utils/api";
 
 function DashboardPage() {
   const [data, setData] = useState(null);
@@ -32,7 +32,7 @@ function DashboardPage() {
   return (
     <Layout>
       <div className="flex justify-between items-center">
-        <p className="text-xl font-smibold text-center text-gray-100">
+        <p className="text-xl font-semibold text-center">
           Dashboard
         </p>
         <Breadcrumbs />
@@ -40,18 +40,18 @@ function DashboardPage() {
 
       {/* <WelcomeCard name={fullName} /> */}
 
-      <div className="min-h-screen text-gray-100 mt-16">
+      <div className="min-h-screen mt-16">
         <main className=" mx-auto space-y-10">
           {/* Header */}
           <header className="space-y-2">
-            <p className="text-sm uppercase tracking-widest text-gray-400">
+            <p className="text-sm uppercase tracking-widest ">
               Summary
             </p>
           </header>
           <DashboardCards />
 
           <div className="my-10">
-            <p className="text-sm uppercase tracking-widest text-gray-400">
+            <p className="text-sm uppercase tracking-widest ">
               Expense Table
             </p>
           </div>

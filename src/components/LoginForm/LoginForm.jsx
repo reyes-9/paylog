@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 export default function LoginForm() {
   const { login } = useAuth();
@@ -27,43 +30,43 @@ export default function LoginForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-sm mx-auto mt-20 bg-white shadow-lg rounded-lg p-6 space-y-4"
+      className="max-w-sm mx-auto mt-20 bg-background text-foreground shadow-lg rounded-lg p-6 space-y-4"
     >
-      <h2 className="text-2xl font-semibold text-center text-gray-800">
+      <h2 className="text-2xl font-semibold text-center text-foreground">
         Welcome Back
       </h2>
 
-      <div>
-        <label className="block text-sm font-medium text-gray-600">Email</label>
-        <input
+      <div className="space-y-2">
+        <Label htmlFor="email">Email</Label>
+        <Input
+          id="email"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Enter your email"
-          className="w-full mt-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
         />
       </div>
 
-      <div>
-        <label className="block text-sm font-medium text-gray-600">
-          Password
-        </label>
-        <input
+      <div className="space-y-2">
+        <Label htmlFor="password">Password</Label>
+        <Input
+          id="password"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Enter your password"
-          className="w-full mt-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
         />
       </div>
 
-      <button
+      <Button
         type="submit"
-        className={`w-full text-white py-2 rounded-md hover:bg-indigo-700 transition-colors ${isLoading ? "bg-gray-400 cursor-not-allowed" : " bg-indigo-600"}`}
+        className={`w-full bg-accent text-accent-foreground hover:bg-accent/70 transition-colors ${
+          isLoading ? "bg-muted cursor-not-allowed" : ""
+        }`}
         disabled={isLoading}
       >
         {isLoading ? "Logging in..." : "Login"}
-      </button>
+      </Button>
     </form>
   );
 }

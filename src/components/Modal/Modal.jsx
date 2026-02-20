@@ -38,7 +38,7 @@ const Modal = ({ isOpen, onClose, title, children, textColor }) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <DialogPanel className="w-full max-w-md transform overflow-hidden rounded-lg bg-white p-6 shadow-xl transition-all">
+              <DialogPanel className="w-full max-w-md transform overflow-hidden rounded-lg bg-card-foreground p-6 shadow-xl transition-all">
                 {/* Header */}
                 <div className="flex items-center justify-between mb-4">
                   <DialogTitle className={`${textColor} text-lg font-semibold`}>

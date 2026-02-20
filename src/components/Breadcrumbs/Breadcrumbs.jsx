@@ -11,7 +11,7 @@ export default function Breadcrumbs() {
       <ol className="flex items-center gap-2 text-gray-50">
         {/* Always show Home */}
         <li className="flex items-center gap-2">
-          <Link to="/" className="hover:text-gray-300 transition">
+          <Link to="/" className="text-muted-foreground transition">
             Home
           </Link>
           {pathnames.length > 0 && <span className="">{">"}</span>}
@@ -24,7 +24,7 @@ export default function Breadcrumbs() {
           return (
             <li key={index} className="flex items-center gap-2 ">
               {!isLast ? (
-                <Link to={routeTo} className="text-gray-50 transition">
+                <Link to={routeTo} className="text-muted-foreground transition">
                   {name.charAt(0).toUpperCase() + name.slice(1)}
                 </Link>
               ) : (
